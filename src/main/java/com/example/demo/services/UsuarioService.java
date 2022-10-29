@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.models.UsuarioModel;
@@ -20,18 +21,16 @@ public class UsuarioService {
     @Autowired
     private EntityManager entityManager;
 
-    public ArrayList<UsuarioModel> obtenerUsuarios(){
-        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
+    public List<UsuarioModel> obtenerUsuarios(){
+         List<UsuarioModel> usuarios = new ArrayList<>();
+
+                usuarioRepository.findAll()
+                .forEach(usuarios::add);
+
+                return usuarios;
+
     }
 
-    /*public ArrayList<UsuarioModel> findAllFilter(boolean isDeleted) {
-        Session session = entityManager.unwrap(Session.class);
-        Filter filter = session.enablefilter("deletedUserFilter");
-        filter.("isDeleted", isDeleted);
-        ArrayList<UsuarioModel> users = usuarioRepository.findAll();
-        session.disableFilter("deletedUserFilter");
-        return users;
-    }*/
 
     public UsuarioModel guardarUsuario(UsuarioModel usuario){
         return usuarioRepository.save(usuario);

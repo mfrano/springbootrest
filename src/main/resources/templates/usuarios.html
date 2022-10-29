@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+
+<body>
+<div class="container-fluid text-center">
+    <div><h2>Administrar Usuarios</h2></div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>EMAIL</th>
+                    <th>NOMBRE</th>
+                    <th>PRIORIDAD</th>
+                    <th>ESTADO</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<ul>
+    <li th:each="usuario : ${usuarios}">
+        <span th:text="${usuario.nombre}">Default</span>
+    </li>
+</ul>
+
+</body>
+
+</html>

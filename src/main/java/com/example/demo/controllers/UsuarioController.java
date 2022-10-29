@@ -1,25 +1,32 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
+import org.springframework.ui.Model;
 import com.example.demo.models.UsuarioModel;
 import com.example.demo.services.UsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("/usuario")
+
+@Controller
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping()
-    public ArrayList<UsuarioModel> obtenerUsuarios(){
-        return usuarioService.obtenerUsuarios();
+    @RequestMapping(value = "/usuarios")
+    public String getAllUser(Model model)
+    {
+        List<UsuarioModel> usuarios = usuarioService.obtenerUsuarios();
+
+        model.addAttribute("usuarios", usuarios);
+
+        return "usuarios";
     }
+
 
     @PostMapping()
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
@@ -55,5 +62,9 @@ public class UsuarioController {
                 });
     }
 
+  /*  @RequestMapping(method = RequestMethod.GET, value = "/usuarios")
+    public String aName() {
+        return "usuarios.html";
+    }*/
 
 }

@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
 </head>
 
 <body>
-<h1>Welcome
-    <span th:style="'color:' + ${color}"
-          th:text="${username}"></span>!</h1>
+<div class="container-fluid text-center">
+    <h1>Bienvenido a Mi Aplicacion</h1>
+    <a class="h2" th:href="@{/usuarios}">Administrar Usuarios</a>
+</div>
 </body>
 
 </html>
