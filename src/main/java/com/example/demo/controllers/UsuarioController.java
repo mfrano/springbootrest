@@ -17,7 +17,7 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @RequestMapping(value = "/usuarios")
+    @RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces = "text/html")
     public String getAllUser(Model model)
     {
         List<UsuarioModel> usuarios = usuarioService.obtenerUsuarios();
@@ -27,29 +27,41 @@ public class UsuarioController {
         return "usuarios";
     }
 
+    @RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<UsuarioModel> getAllUserRest()
+    {
+        return this.usuarioService.obtenerUsuarios();
 
-    @PostMapping()
+    }
+
+    @RequestMapping(value = "/usuarios", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
         return this.usuarioService.guardarUsuario(usuario);
     }
 
-    @GetMapping( path = "/{id}")
+    @RequestMapping(value = "/usuarios/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
     public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
         return this.usuarioService.obtenerPorId(id);
     }
 
-    @GetMapping("/query")
+    @RequestMapping(value = "/usuarios/prioridad", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
     public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
         return this.usuarioService.obtenerPorPrioridad(prioridad);
     }
 
-    @DeleteMapping( path = "/{id}")
+    @RequestMapping(value = "/usuarios/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    @ResponseBody
     public void eliminarPorId(@PathVariable("id") Long id)
     {
          this.usuarioService.eliminarUsuario(id);
     }
 
-    @PutMapping(path = "/{id}")
+    @RequestMapping(value = "/usuarios/{id}", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
     public Optional<UsuarioModel> actualizarUsuario(@PathVariable("id") Long id, @RequestBody UsuarioModel usuario)
     {
 
@@ -61,10 +73,5 @@ public class UsuarioController {
                     return this.usuarioService.guardarUsuario(usuario);
                 });
     }
-
-  /*  @RequestMapping(method = RequestMethod.GET, value = "/usuarios")
-    public String aName() {
-        return "usuarios.html";
-    }*/
 
 }

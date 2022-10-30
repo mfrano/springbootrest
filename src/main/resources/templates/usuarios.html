@@ -11,26 +11,33 @@
 <div class="container-fluid text-center">
     <div><h2>Administrar Usuarios</h2></div>
     <div>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>EMAIL</th>
-                    <th>NOMBRE</th>
-                    <th>PRIORIDAD</th>
-                    <th>ESTADO</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">PRIORIDAD</th>
+                    <th scope="col">ESTADO</th>
                     <th></th>
                 </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">Default</td>
+                    <td th:text="${usuario.email}">Default</td>
+                    <td th:text="${usuario.nombre}">Default</td>
+                    <td th:text="${usuario.prioridad}">Default</td>
+                    <td th:text="${usuario.estado}">Default</td>
+                    <td></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
 
-<ul>
-    <li th:each="usuario : ${usuarios}">
-        <span th:text="${usuario.nombre}">Default</span>
-    </li>
-</ul>
+
 
 </body>
 
