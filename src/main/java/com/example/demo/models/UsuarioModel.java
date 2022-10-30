@@ -1,16 +1,17 @@
 package com.example.demo.models;
 
+import lombok.Data;
 import org.hibernate.annotations.*;
 import org.springframework.context.annotation.ComponentScan;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.xml.crypto.Data;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Date;
 
+@Data
 @ComponentScan
 @Entity
 @Table(name = "usuario")
